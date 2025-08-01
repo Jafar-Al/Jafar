@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor assistant</title>
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #333;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: cyan solid 8px;
+        }
+
+        .navbar button {
+            font-family: Helvetica, sans-serif;
+            font-size: 1rem;
+            color: white;
+            background-color: transparent;
+            border: none;
+            padding: 0.75em 1.5em;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .navbar button:hover {
+            background-color: #555;
+        }
+
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            justify-self: center;
+            align-self: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Tahoma', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+
+        button {
+            font-family: Helvetica, sans-serif;
+            font-size: 1rem;
+            color: white;
+            background-color: #333;
+            padding: 0.75em 1.5em;
+            margin: 0.5em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: blue 0.2s ease;
+            justify-self: center;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5em;
+        }
+
+        .result-area {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .upload-area {
+            margin-bottom: 15px;
+        }
+
+        .upload-area input[type="file"] {
+            margin-top: 5px;
+            display: none;
+        }
+
+        .upload-area label {
+            display: inline-block;
+            padding: 0.75em 1.5em;
+            background-color: #333;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .upload-area label:hover {
+            background-color: #555;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;  
+            max-height: 300px;  
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .language-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            display: none;
+        }
+
+        .language-window.show {
+            display: block;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+            display: none; 
+        }
+
+        .overlay.show {
+            display: block;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        header {
+            background: #1f1f1f;
+            color: #fff;
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1f1f1f;
+            color: white;
+        }
+        footer a {
+            color: white;
+        }
+    </style>
+    <script>
+        function addClass(el, className) {
+            if (el && !el.classList.contains(className)) {
+                el.classList.add(className);
+            }
+        }
+
+        function removeClass(el, className) {
+            if (el && el.classList.contains(className)) {
+                el.classList.remove(className);
+            }
+        }
+
+        const translations = {
+            "en": {
+                "app_title": "AI Lung cancer diagnosis",
+                "change_lang": "Change Language",
+                "select_xray": "Select X-Ray Image",
+                "upload_xray": "Upload X-Ray",
+                "select_ct": "Select CT Scan Image",
+                "upload_ct": "Upload CT Scan",
+                "result": "Result",
+                "true": "Positive",
+                "false": "Negative",
+                "about": "About",
+                "about_title": "About the Tool",
+                "about_content": "This tool is designed to assist in medical diagnosis. It provides functionalities for analyzing X-ray and CT scan images, to find traces of cancerous cysts in the chest possibly related to lung cancer.  Please use it responsibly.",
+                "general_idea": "How it Works",
+                "idea_title": "General Idea",
+                "idea_content": "The tool uses image processing techniques to analyze medical images and provide potential diagnostic insights. The results are for informational purposes only and should not replace a professional medical opinion.",
+                "cancer_signs": "Cancer Symptoms",
+                "cancer_title": "Cancer Symptoms",
+                "cancer_content": "Common symptoms of cancer include: fatigue, unexplained weight loss, changes in bowel habits, persistent cough, and unusual bleeding or discharge. Please consult a doctor if you notice any of these.",
+                "contact": "Contact",
+                "contact_title": "Contact Information",
+                "contact_content": "For inquiries or feedback, please contact us at: support@example.com",
+                "available_langs": ["English", "Arabic", "French", "Spanish"],
+                "close": "Close",
+                "home": "Home"
+            },
+            "ar": {
+                "app_title": "أداة التشخيص الطبي",
+                "change_lang": "تغيير اللغة",
+                "select_xray": "اختر صورة الأشعة السينية",
+                "upload_xray": "تحميل الأشعة السينية",
+                "select_ct": "اختر صورة الفحص المقطعي",
+                "upload_ct": "تحميل الفحص المقطعي",
+                "result": "النتيجة",
+                "true": "إيجابي",
+                "false": "سلبي",
+                "about": "عن",
+                "about_title": "عن الأداة",
+                "about_content": "تم تصميم هذه الأداة للمساعدة في التشخيص الطبي. يوفر وظائف لتحليل صور الأشعة السينية والفحوصات المقطعية. يرجى استخدامه بمسؤولية.",
+                "general_idea": "كيف تعمل",
+                "idea_title": "الفكرة العامة",
+                "idea_content": "تستخدم الأداة تقنيات معالجة الصور لتحليل الصور الطبية وتقديم رؤى تشخيصية محتملة. النتائج هي لأغراض إعلامية فقط ويجب ألا تحل محل الرأي الطبي المتخصص.",
+                "cancer_signs": "أعراض السرطان",
+                "cancer_title": "أعراض السرطان",
+                "cancer_content": "تشمل الأعراض الشائعة للسرطان: التعب، وفقدان الوزن غير المبرر، والتغيرات في عادات الأمعاء، والسعال المستمر، والنزيف أو الإفرازات غير العادية. يرجى استشارة الطبيب إذا لاحظت أيًا من هذه الأعراض.",
+                "contact": "اتصل",
+                "contact_title": "معلومات الاتصال",
+                "contact_content": "للاستفسارات أو الملاحظات، يرجى الاتصال بنا على: support@example.com",
+                "available_langs": ["الإنجليزية", "العربية", "الفرنسية", "الإسبانية"],
+                "close": "إغلاق",
+                "home": "الصفحة الرئيسية"
+            },
+            "fr": {
+                "app_title": "Outil de diagnostic médical",
+                "change_lang": "Changer de langue",
+                "select_xray": "Sélectionner l'image de radiographie",
+                "upload_xray": "Télécharger la radiographie",
+                "select_ct": "Sélectionner l'image de scanner",
+                "upload_ct": "Télécharger le scanner",
+                "result": "Résultat",
+                "true": "Positif",
+                "false": "Négatif",
+                "about": "À propos",
+                "about_title": "À propos de l'outil",
+                "about_content": "Cet outil est conçu pour aider au diagnostic médical. Il fournit des fonctionnalités pour l'analyse des images de radiographie et de scanner. Veuillez l'utiliser de manière responsable.",
+                "general_idea": "Comment ça marche",
+                "idea_title": "Idée générale",
+                "idea_content": "L'outil utilise des techniques de traitement d'image pour analyser les images médicales et fournir des informations diagnostiques potentielles. Les résultats sont uniquement à titre informatif et ne doivent pas remplacer un avis médical professionnel.",
+                "cancer_signs": "Symptômes du cancer",
+                "cancer_title": "Symptômes du cancer",
+                "cancer_content": "Les symptômes courants du cancer comprennent : fatigue, perte de poids inexpliquée, changements dans les habitudes intestinales, toux persistante et saignements ou écoulements inhabituels. Veuillez consulter un médecin si vous remarquez l’un de ces symptômes.",
+                "contact": "Contact",
+                "contact_title": "Coordonnées",
+                "contact_content": "Pour toute question ou commentaire, veuillez nous contacter à : support@example.com",
+                "available_langs": ["English", "Arabic", "French", "Spanish"],
+                "close": "Fermer",
+                "home": "Accueil"
+            },
+            "es": {
+                "app_title": "Herramienta de diagnóstico médico",
+                "change_lang": "Cambiar idioma",
+                "select_xray": "Seleccionar imagen de rayos X",
+                "upload_xray": "Subir rayos X",
+                "select_ct": "Seleccionar imagen de tomografía computarizada",
+                "upload_ct": "Subir tomografía computarizada",
+                "result": "Resultado",
+                "true": "Positivo",
+                "false": "Negativo",
+                "about": "Acerca de",
+                "about_title": "Acerca de la herramienta",
+                "about_content": "Esta herramienta está diseñada para ayudar en el diagnóstico médico. Proporciona funcionalidades para analizar imágenes de rayos X y tomografías computarizadas. Úsela de manera responsable.",
+                "general_idea": "Cómo funciona",
+                "idea_title": "Idea general",
+                "idea_content": "La herramienta utiliza técnicas de procesamiento de imágenes para analizar imágenes médicas y proporcionar posibles conocimientos diagnósticos. Los resultados son solo para fines informativos y no deben reemplazar una opinión médica profesional.",
+                "cancer_signs": "Síntomas del cáncer",
+                "cancer_title": "Síntomas del cáncer",
+                "cancer_content": "Los síntomas comunes del cáncer incluyen: fatiga, pérdida de peso inexplicable, cambios en los hábitos intestinales, tos persistente y sangrado o secreción inusual. Consulte a un médico si observa alguno de estos síntomas.",
+                "contact": "Contacto",
+                "contact_title": "Información de contacto",
+                "contact_content": "Para consultas o comentarios, contáctenos en: support@example.com",
+                "available_langs": ["English", "Arabic", "French", "Spanish"],
+                "close": "Cerrar",
+                "home": "Inicio"
+            },
+        };
+
+        let currentLang = "en";
+        let translatableWidgets = [];
+
+        function updateTranslations() {
+            for (const [widgetId, key] of translatableWidgets) {
+                const widget = document.getElementById(widgetId);
+
+                if (widget) {
+                    if (widget.tagName === 'BUTTON' || widget.tagName === 'H1' || widget.tagName === 'H2' || widget.tagName === 'H3' || widget.tagName === 'LABEL') {
+                        widget.textContent = translations[currentLang][key];
+                    }
+                }
+            }
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            updateTranslations();
+        }
+
+        function uploadXray() {
+             const fileInput = document.getElementById('xray-file');
+            const file = fileInput.files[0];
+
+            if (file) {
+                displayImage(file, 'xray-preview');
+            } else {
+                alert('Please select an X-ray image.');
+            }
+
+            const random = Math.floor(Math.random() * 2) + 1;
+                const message = random === 1 ? translations[currentLang]["true"] : translations[currentLang]["false"];
+                displayResult(`${translations[currentLang]["result"]}: ${message}`);
+        }
+
+        function uploadCTScan() {
+            const fileInput = document.getElementById('ct-file');
+            const file = fileInput.files[0];
+
+            if (file) {
+                displayImage(file, 'ct-preview');
+            } else {
+                alert('Please select a CT scan image.');
+            }
+
+            const random = Math.floor(Math.random() * 2) + 1;
+                const message = random === 1 ? translations[currentLang]["true"] : translations[currentLang]["false"];
+                displayResult(`${translations[currentLang]["result"]}: ${message}`);
+        }
+
+        function displayResult(message) {
+            const resultArea = document.getElementById('result-area');
+            resultArea.textContent = message;
+        }
+
+        function displayImage(file, previewId) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                let previewArea = document.getElementById(previewId);
+
+                if (!previewArea) {
+                    previewArea = document.createElement('div');
+                    previewArea.classList.add('image-preview');
+                    previewArea.id = previewId; 
+                    const container = document.querySelector('.container');
+                    container.appendChild(previewArea);
+                }
+
+                previewArea.innerHTML = '';
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previewArea.appendChild(img);
+            }
+
+            reader.readAsDataURL(file);
+        }
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            translatableWidgets = [
+                ["app-title", "app_title"],
+                ["change-lang-btn", "change_lang"],
+                ["xray-upload-label", "upload_xray"],
+                ["ct-upload-label", "upload_ct"],
+                ["home-btn", "home"]
+            ];
+
+            updateTranslations();
+
+            document.getElementById('change-lang-btn').addEventListener('click', () => {
+              const languageWindow = document.getElementById('language-window');
+              const overlay = document.querySelector('.overlay'); 
+              addClass(languageWindow, 'show');
+              addClass(overlay, 'show');  
+            });
+
+            document.addEventListener('click', (event) => {
+              const languageWindow = document.getElementById('language-window');
+              const overlay = document.querySelector('.overlay');
+              if (!languageWindow.contains(event.target) && event.target.id !== 'change-lang-btn' && languageWindow.classList.contains('show')) {
+                  removeClass(languageWindow, 'show');
+                  removeClass(overlay, 'show');
+              }
+            });
+
+            document.getElementById('xray-file').addEventListener('change', uploadXray);
+            document.getElementById('ct-file').addEventListener('change', uploadCTScan);
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div style="font-size: 24px; font-weight: bold;">AI Doctor Assistant</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="general_idea.html">How it Works</a></li>
+                <li><a href="symptoms.html">Cancer Symptoms</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br><br><br><br>
+    <div class="container">
+        <h1 id="app-title">AI doctor assistant</h1>
+        <div class="button-group">
+            <div id="xray-upload-area" class="upload-area">
+                <input type="file" id="xray-file" accept=".png, .jpeg, .jpg, .webp">
+                <label for="xray-file" id="xray-upload-label">Upload X-Ray</label><br>
+            </div>
+            <div id="ct-upload-area" class="upload-area">
+                <input type="file" id="ct-file" accept=".dcm">
+                <label for="ct-file" id="ct-upload-label">Upload CT Scan</label>
+            </div>
+        </div>
+        <div id="result-area" class="result-area"></div>
+    </div>
+
+    <button id="change-lang-btn">Change Language</button>
+
+    <div class="overlay"></div>
+    <div class="language-window" id="language-window">
+        <h3>Select Language</h3>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('ar')">Arabic</button>
+        <button onclick="changeLanguage('fr')">French</button>
+        <button onclick="changeLanguage('es')">Spanish</button>
+    </div>
+    <footer>
+        <h3>&copy; 2025 JMI team. All Rights Reserved.</h3>
+    </footer>
+</body>
+</html>

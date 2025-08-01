@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; 
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+        .social-icons a {
+            margin: 0 15px;
+            color: black; 
+            text-decoration: none;
+            font-size: 24px; 
+        }
+        .cont {
+            font-size: 22px;
+        }
+        .pfp {
+            width: 50px;
+            height: 50px;
+            border-radius: 1000000px;
+        }
+        .centered {
+            justify-items: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1f1f1f;
+            color: white;
+        }
+
+        .hero {
+            position: relative; 
+            width: 100%;
+            height: 700px; 
+            overflow: hidden; 
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            filter: brightness(70%); 
+            transition: transform 0.5s ease; 
+        }
+
+        .hero:hover img {
+            transform: scale(1.1);
+        }
+
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;  
+            opacity: 0; 
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem; 
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: slideInFromBottom 1s ease; 
+        }
+
+
+
+        .content-section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;  
+            transform: translateY(20px); 
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+
+        .content-section:nth-child(3) { 
+            animation-delay: 0s; 
+        }
+        .content-section:nth-child(4) {
+            animation-delay: 0.2s; 
+        }
+        .content-section:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #007bff;  
+        }
+
+        .content-section p, .content-section ul {
+            margin-bottom: 1.25rem;
+        }
+
+        .content-section ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .content-section a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.2s ease; 
+        }
+
+        .content-section a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        .member-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(250px, 1fr)); 
+            gap: 20px;
+            max-width: 2000px;
+            margin: 2rem auto; 
+            padding: 0 20px;
+            
+        }
+        .member-list-pro {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(250px, 1fr)); 
+            gap: 20px;
+            max-width: 2000px;
+            margin: 2rem auto; 
+            padding: 0 20px;
+            
+        }
+        .member-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+        .member-card-pro {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: fit-content;
+            text-align: center;
+            border: gold solid 4px;
+            box-shadow: 0 0 10px gold;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .member-card-pro img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .member-card h3 { 
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .member-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 400px; 
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .member-list {
+                 padding: 0 10px; 
+            }
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        header {
+            background: #1f1f1f;
+            color: #fff;
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">AI Doctor Assistant</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="general_idea.html">How it Works</a></li>
+                <li><a href="symptoms.html">Cancer Symptoms</a></li>
+            </ul>
+        </nav>
+    </header>
+<br>
+    <div class="hero">
+        <img src="https://media.istockphoto.com/id/1409138328/photo/radiology-doctor-working-diagnose-treatment-virtual-human-lungs-and-long-covid-19-on-modern.jpg?s=612x612&w=0&k=20&c=GBqBA08hJ0WDG6toI1jTgtW6jFRMQC-n5kRjS3j_BW0=" alt="Doctor examining a medical scan with a virtual lung model, representing the diagnosis and treatment of lung cancer">
+        <div class="hero-content">
+            <h1>Who We Are</h1>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>Our Mission</h2>
+        <p class="cont">We are a dedicated team focused on developing innovative solutions for early cancer detection. Our mission is to improve patient outcomes by providing accurate and timely diagnoses.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>Our Values</h2>
+        <ul class="cont">
+            <li>Innovation: We are always seeking new and better ways to utilize technology in the field.</li>
+            <li>Integrity: We hold ourselves to the highest ethical standards.</li>
+            <li>Collaboration: We work as a team, and with others, to advance our goals.</li>
+            <li>Patient-Centricity: The patient always comes first.</li>
+        </ul>
+    </div>
+
+    <div class="content-section cont">
+        <h2>JMI team</h2>
+        <p class="cont">JMI team are a team of young Jordanian minds who specialise in creating beneficial and ethical artificial intelligence applications, and our core values guide our approach.  If you have any questions, please feel free to <a href="contact.html">contact us</a>.</p>
+    </div>
+    <section class="member-list">
+                     <div class="member-card">
+        <img class="pfp" src="asmaa.jpg" alt="Team supervisor">
+            <strong><h3>Asma Hasan</h3></strong>
+            <p>Team supervisor and manager</p>
+            <p>Phone: +962 791222594</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/19EZFVRpS9/" target="_blank" title="Facebook" style="color: #007bff;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://whatsapp.com" target="_blank" title="whatsapp"><i class="fab fa-whatsapp" style="color: #53e953"></i></a>
+                <a href="mailto:asm0001337@gmail.com" target="_blank" title="Mail" style="color: #FF2222"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+            </div>
+                   <div class="member-card">
+            <img class="pfp" src="jafar.png" alt="Jafar">
+            <strong><h3>Jafar Aburadi</h3></strong>
+            <p>Project manager and full stack web developer</p>
+            <p>Phone: +962 795204110</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/1BsYDityPN/" target="_blank" title="Facebook" style="color: #007bff;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://whatsapp.com" target="_blank" title="whatsapp" style="color: #53e953"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/aburadi13?igsh=aWpodWtwNjRjcjJz" target="_blank" title="Instagram" style="color: #d43986"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:jafaraburadi647@gmail.com" target="_blank" title="Mail" style="color: #FF2222"><i class="fa-solid fa-envelope"></i></a>
+                   </div>
+        </div>
+
+        <div class="member-card">
+            <img class="pfp" src="mohannad.jpg" alt="Mohannad">
+            <strong><h3>Muhannad Hudaib</h3></strong>
+            <p>Machine learning expert and data scientist</p>
+            <p>Phone: +962 775872484</p>
+            <div class="social-icons">
+                <a href="https:https://www.facebook.com/share/1815io7qQE/" target="_blank" title="Facebook" style="color: #007bff;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://whatsapp.com" target="_blank" title="whatsapp"><i class="fab fa-whatsapp" style="color: #53e953"></i></a>
+                <a href="https://www.instagram.com/hudaib2009?igsh=MXQ1bXR5OGR5aHVhbw==" target="_blank" title="Instagram" style="color: #d43986"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:hudaib2009@gmail.com" target="_blank" title="Mail" style="color: #FF2222"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="pfp" src="Mohammad.png" alt="Mohammad">
+            <strong><h3>Mohammad AlJamal</h3></strong>
+            <p>Scientific project head</p>
+            <p>Phone: +962 780931976</p>
+            <div class="social-icons">
+                <a href="https://whatsapp.com" target="_blank" title="whatsapp"><i class="fab fa-whatsapp" style="color: #53e953"></i></a>
+                <a href="https://www.instagram.com/mohdaljamal89/" target="_blank" title="Instagram" style="color: #d43986"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:ahmadaljamal033@gmail.com" target="_blank" title="Mail" style="color: #FF2222"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="member-card">
+            <img class="pfp" src="hussein.jpg" alt="Hussein">
+            <strong><h3>Hussein Alsheikh</h3></strong>
+            <p>AI lead developer</p>
+            <p>Phone: +962 779361287</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/1F8qxGGYUH/" target="_blank" title="Facebook" style="color: #007bff;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://whatsapp.com" target="_blank" title="whatsapp"><i class="fab fa-whatsapp" style="color: #53e953"></i></a>
+                <a href="https://www.instagram.com/hussein_alsheikh_?igsh=Y2tsODhueHY4cnFr" target="_blank" title="Instagram" style="color: #d43986"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:husseinalsheikh2010@gmail.com" target="_blank" title="Mail" style="color: #FF2222"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="member-card"> 
+              <img class="pfp" src="islam.jpg" alt="Islam">
+              <strong><h3>Islam Maswadeh</h3> </strong>
+            <p>AI developer</p>
+            <p>Phone: +962 792212206</p><br>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/aslammswdt" target="_blank" title="Facebook" style="color: #007bff;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://whatsapp.com" target="_blank" title="whatsapp"><i class="fab fa-whatsapp" style="color: #53e953"></i></a>
+                <a href="https://www.instagram.com/islam_maswdeh?igsh=OWw4MnkwbTI5djg0" target="_blank" title="Instagram" style="color: #d43986"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:aslammaswadeh@gmail.com" target="_blank" title="Mail"  style="color: #FF2222"><i class="fa-solid fa-envelope"></i></a>  </div>
+            </div>
+        </div>
+    <footer>
+        <h3>&copy; 2025 JMI team. All Rights Reserved.</h3>
+    </footer>
+</body>
+</html>

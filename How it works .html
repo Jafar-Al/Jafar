@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About the Project</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    .navbar {
+      background-color: #111;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .banner-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .box {
+      background-color: #ffffff;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    .box h2 {
+      color: #007bff;
+      font-size: 22px;
+    }
+
+    .box p, .box ul {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .box ul {
+      padding-left: 20px;
+    }
+
+    .box ul li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>AI Doctor Assistant</h1>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How it Works</a>
+      <a href="cancer-symptoms.html">Cancer Symptoms</a>
+    </div>
+  </div>
+
+  <!-- الصورة تحت الحافة السوداء -->
+  <img src="pic1.jpeg" alt="Project Image" class="banner-image" />
+
+  <div class="container">
+
+    <div class="box">
+      <h2>About the Project</h2>
+      <p>
+        Our project is an Artificial Intelligence system designed to detect lung cancer by analyzing chest X-ray images.
+        We trained our custom-built Convolutional Neural Network (CNN) model from scratch using a dataset of 112,000 images provided by the National Institutes of Health (NIH).
+        All code, from training to deployment, was developed entirely by our team in Python.
+        Initially, we created a basic interface using Python's Tkinter library, and later developed a full-featured web application interface.
+        We used TensorFlow as our main deep learning library.
+      </p>
+      <p>
+        <strong>Note:</strong> This system does not replace doctors — it is a tool to assist them in making more accurate diagnoses.
+      </p>
+    </div>
+
+    <div class="box">
+      <h2>How it Works</h2>
+      <ul>
+        <li>The system receives a chest X-ray image as input.</li>
+        <li>The image is processed by a CNN model trained to recognize patterns associated with lung cancer.</li>
+        <li>The model outputs a prediction with a high level of accuracy.</li>
+        <li>The result is displayed to the user through an easy-to-use web interface.</li>
+        <li>The system is designed to assist medical professionals in making faster and more reliable diagnoses.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2>Benefits</h2>
+      <ul>
+        <li><strong>Fast:</strong> Provides results in just a few seconds.</li>
+        <li><strong>Accurate:</strong> Achieved high accuracy during testing and validation.</li>
+        <li><strong>Assists Doctors:</strong> Helps reduce human error by acting as a second opinion.</li>
+        <li><strong>User-Friendly:</strong> Simple web interface suitable for clinical use.</li>
+        <li><strong>Scalable:</strong> Can be adapted to work with other types of medical imaging in the future.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2>AI for Lung Disease Diagnosis</h2>
+      <p>
+        In addition to lung cancer detection, our system is also capable of diagnosing a variety of other lung diseases such as pneumonia and tuberculosis using advanced deep learning techniques.
+        The AI model analyzes chest X-ray images and identifies disease-specific patterns that may not be immediately visible to the human eye.
+      </p>
+      <p>
+        By expanding the scope of the system, we aim to provide a more comprehensive diagnostic tool that can support doctors in identifying multiple pulmonary conditions efficiently and accurately.
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>

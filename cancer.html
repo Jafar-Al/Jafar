@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cancer Awareness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Arial&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9; 
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* شريط علوي */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1f1f1f;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .content-section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      opacity: 0;  
+      transform: translateY(20px); 
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .content-section:nth-of-type(2) { animation-delay: 0s; }
+    .content-section:nth-of-type(3) { animation-delay: 0.2s; }
+    .content-section:nth-of-type(4) { animation-delay: 0.4s; }
+    .content-section:nth-of-type(5) { animation-delay: 0.6s; }
+
+    .content-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #007bff;  
+    }
+
+    .content-section p, .content-section ul {
+      margin-bottom: 1.25rem;
+    }
+
+    .content-section ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الشريط العلوي -->
+  <div class="navbar">
+    <h1>AI Doctor Assistant</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">How it Works</a>
+      <a href="#">Cancer Symptoms</a>
+    </div>
+  </div>
+
+  <!-- المحتوى -->
+  <div class="content-section">
+    <h2>What Is Cancer</h2>
+    <p>
+      Cancer is a disease where certain cells in the body begin to grow and divide uncontrollably.
+      These abnormal cells don’t die when they should, and they can invade nearby tissues or spread to other parts of the body through the blood or lymph systems.
+      This uncontrolled growth disrupts how normal organs work and can be life-threatening.
+    </p>
+    <p>
+      Listen to me carefully—cancer is not a myth, and it doesn’t wait for anyone. It’s real, and it can grow silently.
+      The earlier you understand that, the better you can protect yourself and the people you love. You, yes you.
+    </p>
+  </div>
+
+  <div class="content-section">
+    <h2>What Is Lung Cancer</h2>
+    <p>
+      Lung cancer is a type of cancer that starts in the lungs—usually in the cells lining the airways.
+      It is one of the most dangerous types of cancer in the world.
+      In fact, according to the World Health Organization, lung cancer is the leading cause of cancer death globally.
+      This cancer can grow silently for years, often without clear symptoms, and by the time it is found, it may have already spread to other organs.
+    </p>
+    <p>
+      Don’t take this lightly. This isn’t just any illness. Lung cancer is deadly—but it becomes weaker when you act early.
+      So act. Not just for you—for your family, your friends, your people. You.
+    </p>
+  </div>
+
+  <div class="content-section">
+    <h2>What Are the Signs of Lung Cancer</h2>
+    <ul>
+      <li>Unexplained weight loss,</li>
+      <li>Constant fever or high body temperature,</li>
+      <li>Excessive night sweating,</li>
+      <li>Persistent cough or chest pain,</li>
+    </ul>
+    <p>
+      These signs can be easy to ignore—but they shouldn’t be.
+      If you notice any of these symptoms, or even all of them, go see a doctor immediately.
+      This is your body talking. Don’t ignore it. Don’t wait. Act now—you, and take everyone you care about with you.
+    </p>
+  </div>
+
+  <div class="content-section">
+    <h2>The Importance of Early Detection</h2>
+    <p>
+      Early detection of lung cancer means finding it before it has spread or caused major damage.
+      When caught early, lung cancer can sometimes be treated more effectively—and even cured in some cases.
+      Tools like chest X-rays, CT scans, and now artificial intelligence help detect it faster and more accurately.
+    </p>
+    <p>
+      Early detection is the strongest peaceful weapon we have against cancer.
+      It’s not just about you going to get checked—it’s about bringing your loved ones, your family,
+      your daughters, your friends, your people. Don’t wait until it’s too late. Move now—you.
+    </p>
+  </div>
+
+</body>
+</html>
