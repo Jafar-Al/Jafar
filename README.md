@@ -37,8 +37,8 @@
 class About extends Me { 
   const myTools = {  
     "ProgramingLanguages" : { "Python", "Javascript", "C++", "Assembly" },
-    "OtherLanguages" : { "HTML", "CSS", "Bash", "Markdown" },
-    "Editors" : { "VS Code", "Neovim" },
+    "OtherLanguages" : { "HTML", "CSS", "Bash"},
+    "Editors" : { "VS Code"},
     "Platforms" : { "GNU/Linux", "Windows" },
     "OtherTools" : { "Git" }
   };
@@ -57,7 +57,7 @@ class About extends Me {
   - <a href="https://www.instagram.com/aburadi13?igsh=MTE0djdlaXF1bnB2cA%3D%3D">Instagram</a>
   - <a href="https://www.facebook.com/share/1KLBKv6bcx/">Facebook</a>
   - <a href="https://discord.com/users/1294768191804801034">Discord</a>
-- <img src="https://github.com/SP-XD/SP-XD/blob/main/images/letterbox.gif?raw=true" width="25" /> &nbsp; Contact me on Telegram: **[Jafar Aburadi](https://t.me/your_telegram_here)**<br>
+- <img src="https://github.com/SP-XD/SP-XD/blob/main/images/letterbox.gif?raw=true" width="25" /> &nbsp; 
 - &nbsp;&nbsp;<img src="https://github.com/SP-XD/SP-XD/blob/main/images/lightning.gif?raw=true" width="12" />&nbsp;&nbsp;&nbsp;&nbsp;Fun fact: I'm 15 years old and already diving deep into cybersecurity & AI!<br>
 
 <div align="center" >
