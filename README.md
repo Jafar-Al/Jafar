@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I am Jafar</h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=F7F7F7&center=true&vCenter=true&width=435&lines=I+am+Jafar;Cybersecurity+Enthusiast;Web+Developer;Passionate+about+AI+and+Security" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com/demo/?size=24&duration=3000&color=000000&background=FFFFFF00&center=true&vCenter=true&height=80&lines=Hi+Coders;I+am+Jafar+Aburadi" alt="Typing SVG" />
 </p>
 
 ---
