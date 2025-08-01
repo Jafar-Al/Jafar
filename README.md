@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I am Jafar</h1>
 
 <p align="center">
-  <a href="https://git.io/typing-svg">
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=000000&background=FFFFFF00&center=true&vCenter=true&width=435&height=80&lines=%3Ch1%3EHi+Coders%3C%2Fh1%3E;+%3Ch2%3EI+am+Jafar+Aburadi%3C%2Fh2%3E" alt="Typing SVG" /></a>
     <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=000000&background=FFFFFF00&center=true&vCenter=true&width=435&height=80&lines=%3Ch1%3EHi+Coders%3C%2Fh1%3E;+%3Ch2%3EI+am+Jafar+Aburadi%3C%2Fh2%3E" alt="Typing SVG" />
   </a>
 </p>
